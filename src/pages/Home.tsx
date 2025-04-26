@@ -119,15 +119,25 @@ const Home = () => {
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
             {[
-              "PHP", "Laravel", "JavaScript", "MySQL",
-              "MongoDB", "Tailwind CSS", "AWS", "Docker",
-              "Google Cloud", "Kubernetes", "Jenkins", "Node.js"
+              { name: "PHP", icon: <i className="devicon-php-plain colored text-2xl"></i> },
+              { name: "Laravel", icon: <i className="devicon-laravel-plain colored text-2xl"></i> },
+              { name: "JavaScript", icon: <i className="devicon-javascript-plain colored text-2xl"></i> },
+              { name: "MySQL", icon: <i className="devicon-mysql-plain colored text-2xl"></i> },
+              { name: "MongoDB", icon: <i className="devicon-mongodb-plain colored text-2xl"></i> },
+              { name: "Tailwind CSS", icon: <i className="devicon-tailwindcss-plain colored text-2xl"></i> },
+              { name: "AWS", icon: <i className="devicon-amazonwebservices-original colored text-2xl"></i> },
+              { name: "Docker", icon: <i className="devicon-docker-plain colored text-2xl"></i> },
+              { name: "Google Cloud", icon: <i className="devicon-googlecloud-plain colored text-2xl"></i> },
+              { name: "Kubernetes", icon: <i className="devicon-kubernetes-plain colored text-2xl"></i> },
+              { name: "Jenkins", icon: <i className="devicon-jenkins-plain colored text-2xl"></i> },
+              { name: "Node.js", icon: <i className="devicon-nodejs-plain colored text-2xl"></i> }
             ].map((skill, index) => (
               <div
                 key={index}
-                className="p-4 bg-white dark:bg-dark-card rounded-lg shadow-sm text-center hover:shadow-md transition-shadow"
+                className="p-4 bg-white dark:bg-dark-card rounded-lg shadow-sm text-center hover:shadow-md transition-shadow flex flex-col items-center gap-2"
               >
-                <span className="text-gray-800 dark:text-gray-200">{skill}</span>
+                {skill.icon}
+                <span className="text-gray-800 dark:text-gray-200">{skill.name}</span>
               </div>
             ))}
           </div>
@@ -148,7 +158,7 @@ const Home = () => {
                 Multi-Location Digital Presence Management
               </h3>
               <p className="text-gray-600 dark:text-gray-400 mb-4">
-                A SaaS platform enabling businesses to manage their online presence across multiple locations. Features include centralized management of Google Business Profiles and localized marketing tools.
+                Built with Laravel, React, and MySQL. Implemented RESTful APIs, OAuth2 authentication, and Google Maps API integration. Achieved 99.9% uptime with AWS infrastructure.
               </p>
               <Link to="/projects" className="text-primary dark:text-accent hover:underline">
                 Learn More →
@@ -159,7 +169,7 @@ const Home = () => {
                 QuickSite - Website Builder
               </h3>
               <p className="text-gray-600 dark:text-gray-400 mb-4">
-                An innovative SaaS solution for generating fully functional websites instantly, featuring advanced SEO tools and pre-built responsive templates.
+                Node.js backend with React frontend. Features serverless architecture, CI/CD pipeline with Jenkins, and containerized microservices using Docker and Kubernetes.
               </p>
               <Link to="/projects" className="text-primary dark:text-accent hover:underline">
                 Learn More →
