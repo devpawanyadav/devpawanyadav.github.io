@@ -59,18 +59,30 @@ const Home = () => {
           {[
             {
               title: "Frontend Development",
-              description: "Building responsive and interactive user interfaces with modern technologies.",
-              icon: "🎨"
+              description: "Crafting modern web interfaces using React, TypeScript, Next.js, and TailwindCSS. Specializing in responsive design, state management (Redux/Context), and performance optimization.",
+              icon: (
+                <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                </svg>
+              )
             },
             {
               title: "Backend Development",
-              description: "Creating robust and scalable server-side solutions.",
-              icon: "⚙️"
+              description: "Building scalable APIs and microservices using Node.js, PHP/Laravel, and Python. Expertise in database design, cloud infrastructure (AWS/GCP), and CI/CD pipelines.",
+              icon: (
+                <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
+                </svg>
+              )
             },
             {
               title: "Full Stack Solutions",
-              description: "Delivering end-to-end web applications with seamless integration.",
-              icon: "🔄"
+              description: "Delivering complete web solutions with modern tech stack. Implementing secure authentication, RESTful APIs, real-time features, and containerized deployments using Docker/Kubernetes.",
+              icon: (
+                <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+              )
             }
           ].map((service, index) => (
             <motion.div
@@ -102,9 +114,15 @@ const Home = () => {
           </h2>
           <div className="max-w-3xl mx-auto text-gray-600 dark:text-gray-400">
             <p className="mb-6 text-lg">
-              With over 9 years of experience in software development, I specialize in designing and developing scalable web applications. 
-              My expertise includes backend and frontend technologies, cloud solutions, and agile methodologies.
+              With over 9 years of experience in software development, I've successfully delivered enterprise-scale applications 
+              and led technical teams across various industries. My expertise includes:
             </p>
+            <ul className="list-disc list-inside space-y-3 mb-6 text-lg pl-4">
+              <li>Architecting scalable web applications using microservices architecture</li>
+              <li>Leading development of cloud-native solutions on AWS and Google Cloud</li>
+              <li>Implementing CI/CD pipelines and DevOps best practices</li>
+              <li>Optimizing application performance and database efficiency</li>
+            </ul>
           </div>
         </motion.div>
 
@@ -135,9 +153,9 @@ const Home = () => {
               <div
                 key={index}
                 className="p-4 bg-white dark:bg-dark-card rounded-lg shadow-sm text-center hover:shadow-md transition-shadow flex flex-col items-center gap-2"
-              >
-                {skill.icon}
-                <span className="text-gray-800 dark:text-gray-200">{skill.name}</span>
+>
+                  {skill.icon}
+                  <span className="text-gray-800 dark:text-gray-200">{skill.name}</span>
               </div>
             ))}
           </div>
