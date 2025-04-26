@@ -10,10 +10,10 @@ const Home = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-dark-text">
-            Hi, I'm <span className="text-primary dark:text-accent">Pawan Yadav</span>
+          <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent dark:from-accent dark:to-primary">
+            Hi, I'm Pawan Yadav
           </h1>
-          <p className="text-xl md:text-2xl text-gray-700 dark:text-gray-400 mb-8">
+          <p className="text-xl md:text-2xl text-gray-700 dark:text-gray-300 mb-8 font-light">
             Full Stack Developer | React Specialist | Tech Enthusiast
           </p>
         </motion.div>
@@ -24,7 +24,7 @@ const Home = () => {
           transition={{ delay: 0.2, duration: 0.5 }}
           className="mb-12 text-gray-600 dark:text-gray-400 leading-relaxed"
         >
-          <p className="mb-4">
+          <p className="mb-4 text-lg">
             I create modern web applications with a focus on performance,
             accessibility, and user experience.
           </p>
@@ -38,13 +38,13 @@ const Home = () => {
         >
           <Link
             to="/projects"
-            className="px-8 py-3 bg-primary hover:bg-secondary dark:bg-accent dark:hover:bg-primary text-white rounded-lg transition-colors"
+            className="px-8 py-3 bg-gradient-to-r from-primary to-secondary hover:from-secondary hover:to-primary dark:from-accent dark:to-primary dark:hover:from-primary dark:hover:to-accent text-white rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
           >
             View My Work
           </Link>
           <Link
             to="/contact"
-            className="px-8 py-3 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-900 dark:text-gray-100 rounded-lg transition-colors"
+            className="px-8 py-3 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-900 dark:text-gray-100 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
           >
             Get in Touch
           </Link>
@@ -59,28 +59,35 @@ const Home = () => {
           {[
             {
               title: "Frontend Development",
-              description: "Building responsive and interactive user interfaces with modern technologies."
+              description: "Building responsive and interactive user interfaces with modern technologies.",
+              icon: "🎨"
             },
             {
               title: "Backend Development",
-              description: "Creating robust and scalable server-side solutions."
+              description: "Creating robust and scalable server-side solutions.",
+              icon: "⚙️"
             },
             {
               title: "Full Stack Solutions",
-              description: "Delivering end-to-end web applications with seamless integration."
+              description: "Delivering end-to-end web applications with seamless integration.",
+              icon: "🔄"
             }
           ].map((service, index) => (
-            <div
+            <motion.div
               key={index}
-              className="p-6 bg-white dark:bg-dark-card rounded-lg shadow-lg transition-colors"
+              whileHover={{ scale: 1.05 }}
+              className="p-6 bg-white dark:bg-dark-card rounded-xl shadow-lg transition-all duration-300 hover:shadow-2xl border border-transparent hover:border-primary dark:hover:border-accent group"
             >
-              <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-dark-text">
+              <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                {service.icon}
+              </div>
+              <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-dark-text group-hover:text-primary dark:group-hover:text-accent transition-colors">
                 {service.title}
               </h3>
               <p className="text-gray-600 dark:text-gray-400">
                 {service.description}
               </p>
-            </div>
+            </motion.div>
           ))}
         </motion.div>
 
