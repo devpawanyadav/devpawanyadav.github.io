@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 interface Project {
   title: string;
@@ -7,39 +7,132 @@ interface Project {
   technologies: string[];
   link: string;
   image?: string;
-  category: 'frontend' | 'backend' | 'fullstack';
+  category: 'web' | 'mobile' | 'ai-ml' | 'blockchain' | 'cloud';
 }
 
 const Projects = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [projects, setProjects] = useState<Project[]>([]);
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [selectedCategory, setSelectedCategory] = useState('all');
 
   useEffect(() => {
     const loadProjects = async () => {
       await new Promise(resolve => setTimeout(resolve, 1000));
       setProjects([
+        // Web Development Projects
         {
           title: "Modern Portfolio",
           description: "A dynamic portfolio website showcasing modern web technologies and smooth animations",
           technologies: ["React", "TypeScript", "Tailwind CSS", "Framer Motion"],
           link: "https://github.com/pawanyd/pawanyd.github.io",
-          category: 'frontend',
+          category: 'web',
           image: '/portfolio-preview.png'
         },
         {
-          title: "Project Management Dashboard",
-          description: "Real-time project management platform with team collaboration features",
-          technologies: ["React", "Node.js", "MongoDB", "Socket.io", "Express"],
-          link: "https://github.com/pawanyd/project-dashboard",
-          category: 'fullstack'
+          title: "E-commerce Platform",
+          description: "Full-featured online shopping platform with cart and payment integration",
+          technologies: ["Next.js", "MongoDB", "Stripe", "Redux"],
+          link: "https://github.com/pawanyd/ecommerce-platform",
+          category: 'web'
         },
         {
-          title: "E-commerce Platform",
-          description: "Feature-rich e-commerce solution with secure payment processing",
-          technologies: ["Next.js", "Stripe", "PostgreSQL", "Docker", "AWS"],
-          link: "https://github.com/pawanyd/ecommerce-platform",
-          category: 'fullstack'
+          title: "Blog CMS",
+          description: "Content Management System for managing blog posts and articles",
+          technologies: ["React", "Node.js", "PostgreSQL", "GraphQL"],
+          link: "https://github.com/pawanyd/blog-cms",
+          category: 'web'
+        },
+
+        // Mobile Projects
+        {
+          title: "Fitness Tracker App",
+          description: "Mobile app for tracking workouts and health metrics",
+          technologies: ["React Native", "Firebase", "Redux", "Native APIs"],
+          link: "https://github.com/pawanyd/fitness-tracker",
+          category: 'mobile'
+        },
+        {
+          title: "Food Delivery App",
+          description: "On-demand food delivery application with real-time tracking",
+          technologies: ["Flutter", "Firebase", "Google Maps", "Stripe"],
+          link: "https://github.com/pawanyd/food-delivery",
+          category: 'mobile'
+        },
+        {
+          title: "Social Media App",
+          description: "Cross-platform social networking application",
+          technologies: ["React Native", "Socket.io", "MongoDB", "AWS"],
+          link: "https://github.com/pawanyd/social-app",
+          category: 'mobile'
+        },
+
+        // AI & Machine Learning Projects
+        {
+          title: "AI Image Generator",
+          description: "Deep learning-based image generation platform using state-of-the-art models",
+          technologies: ["Python", "TensorFlow", "Flask", "React", "AWS"],
+          link: "https://github.com/pawanyd/ai-image-generator",
+          category: 'ai-ml'
+        },
+        {
+          title: "Sentiment Analysis Tool",
+          description: "Real-time sentiment analysis for social media posts",
+          technologies: ["Python", "NLTK", "FastAPI", "React"],
+          link: "https://github.com/pawanyd/sentiment-analyzer",
+          category: 'ai-ml'
+        },
+        {
+          title: "Object Detection System",
+          description: "Real-time object detection using computer vision",
+          technologies: ["Python", "OpenCV", "TensorFlow", "YOLOv5"],
+          link: "https://github.com/pawanyd/object-detection",
+          category: 'ai-ml'
+        },
+
+        // Blockchain Projects
+        {
+          title: "NFT Marketplace",
+          description: "Decentralized marketplace for trading digital assets",
+          technologies: ["Solidity", "Web3.js", "React", "Ethereum", "IPFS"],
+          link: "https://github.com/pawanyd/nft-marketplace",
+          category: 'blockchain'
+        },
+        {
+          title: "DeFi Exchange",
+          description: "Decentralized cryptocurrency exchange platform",
+          technologies: ["Solidity", "Hardhat", "React", "Ethers.js"],
+          link: "https://github.com/pawanyd/defi-exchange",
+          category: 'blockchain'
+        },
+        {
+          title: "Smart Contract Wallet",
+          description: "Multi-signature wallet with advanced security features",
+          technologies: ["Solidity", "Web3.js", "React", "MetaMask"],
+          link: "https://github.com/pawanyd/smart-wallet",
+          category: 'blockchain'
+        },
+
+        // Cloud & DevOps Projects
+        {
+          title: "Cloud Native Microservices",
+          description: "Scalable microservices architecture deployed on Kubernetes",
+          technologies: ["Docker", "Kubernetes", "Node.js", "MongoDB", "GCP"],
+          link: "https://github.com/pawanyd/cloud-microservices",
+          category: 'cloud'
+        },
+        {
+          title: "Serverless API Platform",
+          description: "Serverless backend architecture with automatic scaling",
+          technologies: ["AWS Lambda", "API Gateway", "DynamoDB", "Terraform"],
+          link: "https://github.com/pawanyd/serverless-api",
+          category: 'cloud'
+        },
+        {
+          title: "CI/CD Pipeline",
+          description: "Automated deployment pipeline with monitoring",
+          technologies: ["Jenkins", "Docker", "AWS", "Prometheus", "Grafana"],
+          link: "https://github.com/pawanyd/cicd-pipeline",
+          category: 'cloud'
         }
       ]);
       setIsLoading(false);
@@ -48,34 +141,50 @@ const Projects = () => {
     loadProjects();
   }, []);
 
-  const filteredProjects = selectedCategory === 'all' 
-    ? projects 
-    : projects.filter(project => project.category === selectedCategory);
+  const handleCategoryClick = (categoryId: string) => {
+    // Force state update and prevent any race conditions
+    setSelectedCategory(prevCategory => {
+      if (prevCategory === categoryId) {
+        return categoryId; // Still update to trigger re-render
+      }
+      return categoryId;
+    });
+  };
+
+  // Memoize filtered projects to prevent unnecessary re-renders
+  const filteredProjects = React.useMemo(() => {
+    return projects.filter(project => {
+      if (selectedCategory === 'all') return true;
+      return project.category === selectedCategory;
+    });
+  }, [projects, selectedCategory]);
 
   const categories = [
     { id: 'all', label: 'All Projects' },
-    { id: 'frontend', label: 'Frontend' },
-    { id: 'backend', label: 'Backend' },
-    { id: 'fullstack', label: 'Full Stack' }
+    { id: 'web', label: 'Web Development' },
+    { id: 'mobile', label: 'Mobile Apps' },
+    { id: 'ai-ml', label: 'AI & Machine Learning' },
+    { id: 'blockchain', label: 'Blockchain' },
+    { id: 'cloud', label: 'Cloud & DevOps' }
   ];
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50 dark:from-dark-bg dark:to-gray-900">
       {/* Hero Section with Animated Background */}
-      <div className="relative overflow-hidden">
+      <div className="relative overflow-hidden pb-32">
         {/* Animated geometric shapes */}
-        <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute inset-0 overflow-hidden" style={{ zIndex: 0 }}>
           <div className="absolute top-0 left-0 w-96 h-96 bg-primary/5 rounded-full mix-blend-multiply filter blur-xl animate-blob" />
           <div className="absolute top-0 right-0 w-96 h-96 bg-secondary/5 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000" />
           <div className="absolute -bottom-8 left-20 w-96 h-96 bg-accent/5 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-4000" />
         </div>
 
-        <div className="container mx-auto px-4 pt-24 pb-32">
+        <div className="container mx-auto px-4 pt-24 relative" style={{ zIndex: 1 }}>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="relative z-10 max-w-4xl mx-auto text-center"
+            className="max-w-4xl mx-auto text-center"
           >
             <motion.div
               initial={{ scale: 0.95 }}
@@ -103,19 +212,23 @@ const Projects = () => {
       </div>
 
       {/* Filter Categories */}
-      <div className="container mx-auto px-4 -mt-16 mb-12">
+      <div className="container mx-auto px-4 -mt-16 mb-12 relative" style={{ zIndex: 10 }}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
           className="max-w-4xl mx-auto"
         >
-          <div className="bg-white dark:bg-dark-card rounded-2xl shadow-lg p-4 flex flex-wrap gap-4 justify-center">
+          <div className="bg-white dark:bg-dark-card rounded-2xl shadow-lg p-4 flex flex-wrap gap-4 justify-center relative">
             {categories.map((category) => (
               <button
                 key={category.id}
-                onClick={() => setSelectedCategory(category.id)}
-                className={`px-6 py-2 rounded-xl text-sm font-medium transition-all duration-300
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleCategoryClick(category.id);
+                }}
+                className={`px-6 py-2 rounded-xl text-sm font-medium transition-all duration-300 cursor-pointer relative
                   ${selectedCategory === category.id 
                     ? 'bg-primary text-white shadow-lg scale-105' 
                     : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-primary/10 dark:hover:bg-accent/10'
@@ -129,13 +242,19 @@ const Projects = () => {
       </div>
 
       {/* Projects Grid */}
-      <div className="container mx-auto px-4 pb-24">
+      <div className="container mx-auto px-4 pb-24 relative" style={{ zIndex: 5 }}>
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6 }}
           className="max-w-7xl mx-auto"
         >
+          {/* Debug info */}
+          <div className="text-center mb-4 text-gray-600 dark:text-gray-400">
+            <p>Current category: {selectedCategory}</p>
+            <p>Showing {filteredProjects.length} projects</p>
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {isLoading ? (
               // Loading skeletons with subtle animation
