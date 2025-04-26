@@ -6,7 +6,7 @@ interface Project {
   description: string;
   technologies: string[];
   link: string;
-  image?: string;
+  image: string; // Making image required instead of optional
   category: 'web' | 'mobile' | 'ai-ml' | 'blockchain' | 'cloud';
 }
 
@@ -26,21 +26,23 @@ const Projects = () => {
           technologies: ["React", "TypeScript", "Tailwind CSS", "Framer Motion"],
           link: "https://github.com/pawanyd/pawanyd.github.io",
           category: 'web',
-          image: '/portfolio-preview.png'
+          image: 'https://placehold.co/600x400'
         },
         {
           title: "E-commerce Platform",
           description: "Full-featured online shopping platform with cart and payment integration",
           technologies: ["Next.js", "MongoDB", "Stripe", "Redux"],
           link: "https://github.com/pawanyd/ecommerce-platform",
-          category: 'web'
+          category: 'web',
+          image: 'https://placehold.co/600x400'
         },
         {
           title: "Blog CMS",
           description: "Content Management System for managing blog posts and articles",
           technologies: ["React", "Node.js", "PostgreSQL", "GraphQL"],
           link: "https://github.com/pawanyd/blog-cms",
-          category: 'web'
+          category: 'web',
+          image: 'https://placehold.co/600x400'
         },
 
         // Mobile Projects
@@ -49,21 +51,24 @@ const Projects = () => {
           description: "Mobile app for tracking workouts and health metrics",
           technologies: ["React Native", "Firebase", "Redux", "Native APIs"],
           link: "https://github.com/pawanyd/fitness-tracker",
-          category: 'mobile'
+          category: 'mobile',
+          image: 'https://placehold.co/600x400'
         },
         {
           title: "Food Delivery App",
           description: "On-demand food delivery application with real-time tracking",
           technologies: ["Flutter", "Firebase", "Google Maps", "Stripe"],
           link: "https://github.com/pawanyd/food-delivery",
-          category: 'mobile'
+          category: 'mobile',
+          image: 'https://placehold.co/600x400'
         },
         {
           title: "Social Media App",
           description: "Cross-platform social networking application",
           technologies: ["React Native", "Socket.io", "MongoDB", "AWS"],
           link: "https://github.com/pawanyd/social-app",
-          category: 'mobile'
+          category: 'mobile',
+          image: 'https://placehold.co/600x400'
         },
 
         // AI & Machine Learning Projects
@@ -72,21 +77,24 @@ const Projects = () => {
           description: "Deep learning-based image generation platform using state-of-the-art models",
           technologies: ["Python", "TensorFlow", "Flask", "React", "AWS"],
           link: "https://github.com/pawanyd/ai-image-generator",
-          category: 'ai-ml'
+          category: 'ai-ml',
+          image: 'https://placehold.co/600x400'
         },
         {
           title: "Sentiment Analysis Tool",
           description: "Real-time sentiment analysis for social media posts",
           technologies: ["Python", "NLTK", "FastAPI", "React"],
           link: "https://github.com/pawanyd/sentiment-analyzer",
-          category: 'ai-ml'
+          category: 'ai-ml',
+          image: 'https://placehold.co/600x400'
         },
         {
           title: "Object Detection System",
           description: "Real-time object detection using computer vision",
           technologies: ["Python", "OpenCV", "TensorFlow", "YOLOv5"],
           link: "https://github.com/pawanyd/object-detection",
-          category: 'ai-ml'
+          category: 'ai-ml',
+          image: 'https://placehold.co/600x400'
         },
 
         // Blockchain Projects
@@ -95,21 +103,24 @@ const Projects = () => {
           description: "Decentralized marketplace for trading digital assets",
           technologies: ["Solidity", "Web3.js", "React", "Ethereum", "IPFS"],
           link: "https://github.com/pawanyd/nft-marketplace",
-          category: 'blockchain'
+          category: 'blockchain',
+          image: 'https://placehold.co/600x400'
         },
         {
           title: "DeFi Exchange",
           description: "Decentralized cryptocurrency exchange platform",
           technologies: ["Solidity", "Hardhat", "React", "Ethers.js"],
           link: "https://github.com/pawanyd/defi-exchange",
-          category: 'blockchain'
+          category: 'blockchain',
+          image: 'https://placehold.co/600x400'
         },
         {
           title: "Smart Contract Wallet",
           description: "Multi-signature wallet with advanced security features",
           technologies: ["Solidity", "Web3.js", "React", "MetaMask"],
           link: "https://github.com/pawanyd/smart-wallet",
-          category: 'blockchain'
+          category: 'blockchain',
+          image: 'https://placehold.co/600x400'
         },
 
         // Cloud & DevOps Projects
@@ -118,21 +129,24 @@ const Projects = () => {
           description: "Scalable microservices architecture deployed on Kubernetes",
           technologies: ["Docker", "Kubernetes", "Node.js", "MongoDB", "GCP"],
           link: "https://github.com/pawanyd/cloud-microservices",
-          category: 'cloud'
+          category: 'cloud',
+          image: 'https://placehold.co/600x400'
         },
         {
           title: "Serverless API Platform",
           description: "Serverless backend architecture with automatic scaling",
           technologies: ["AWS Lambda", "API Gateway", "DynamoDB", "Terraform"],
           link: "https://github.com/pawanyd/serverless-api",
-          category: 'cloud'
+          category: 'cloud',
+          image: 'https://placehold.co/600x400'
         },
         {
           title: "CI/CD Pipeline",
           description: "Automated deployment pipeline with monitoring",
           technologies: ["Jenkins", "Docker", "AWS", "Prometheus", "Grafana"],
           link: "https://github.com/pawanyd/cicd-pipeline",
-          category: 'cloud'
+          category: 'cloud',
+          image: 'https://placehold.co/600x400'
         }
       ]);
       setIsLoading(false);
@@ -289,24 +303,32 @@ const Projects = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
+                  whileHover={{ 
+                    scale: 1.03,
+                    transition: { duration: 0.2 }
+                  }}
                   className="group relative bg-white dark:bg-dark-card rounded-2xl shadow-lg overflow-hidden
-                           transform transition-all duration-300 hover:scale-[1.02] hover:shadow-xl"
+                           transition-all duration-300 hover:shadow-2xl"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-accent/0 
-                                group-hover:from-primary/5 group-hover:to-accent/5 transition-all duration-300" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-accent/10 
+                                opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   
-                  {project.image && (
-                    <div className="relative h-48 overflow-hidden">
-                      <img
-                        src={project.image}
-                        alt={project.title}
-                        className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300"
-                      />
-                    </div>
-                  )}
+                  <div className="relative h-48 overflow-hidden">
+                    <motion.img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-full object-cover"
+                      whileHover={{ 
+                        scale: 1.1,
+                        transition: { duration: 0.3 }
+                      }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  </div>
                   
                   <div className="p-6 relative">
-                    <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-dark-text group-hover:text-primary dark:group-hover:text-accent transition-colors">
+                    <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-dark-text 
+                                 group-hover:text-primary dark:group-hover:text-accent transition-colors">
                       {project.title}
                     </h3>
                     <p className="text-gray-600 dark:text-gray-400 mb-4">{project.description}</p>
