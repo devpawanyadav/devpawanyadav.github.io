@@ -83,6 +83,83 @@ const Home = () => {
             </div>
           ))}
         </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8, duration: 0.5 }}
+          className="mt-24"
+        >
+          <h2 className="text-3xl font-bold mb-8 text-center text-gray-900 dark:text-dark-text">
+            Professional Experience
+          </h2>
+          <div className="max-w-3xl mx-auto text-gray-600 dark:text-gray-400">
+            <p className="mb-6 text-lg">
+              With over 9 years of experience in software development, I specialize in designing and developing scalable web applications. 
+              My expertise includes backend and frontend technologies, cloud solutions, and agile methodologies.
+            </p>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.0, duration: 0.5 }}
+          className="mt-16"
+        >
+          <h2 className="text-3xl font-bold mb-8 text-center text-gray-900 dark:text-dark-text">
+            Technical Expertise
+          </h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+            {[
+              "PHP", "Laravel", "JavaScript", "MySQL",
+              "MongoDB", "Tailwind CSS", "AWS", "Docker",
+              "Google Cloud", "Kubernetes", "Jenkins", "Node.js"
+            ].map((skill, index) => (
+              <div
+                key={index}
+                className="p-4 bg-white dark:bg-dark-card rounded-lg shadow-sm text-center hover:shadow-md transition-shadow"
+              >
+                <span className="text-gray-800 dark:text-gray-200">{skill}</span>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.2, duration: 0.5 }}
+          className="mt-24 mb-16"
+        >
+          <h2 className="text-3xl font-bold mb-8 text-center text-gray-900 dark:text-dark-text">
+            Featured Projects
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            <div className="bg-white dark:bg-dark-card rounded-lg shadow-lg p-6">
+              <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-dark-text">
+                Multi-Location Digital Presence Management
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400 mb-4">
+                A SaaS platform enabling businesses to manage their online presence across multiple locations. Features include centralized management of Google Business Profiles and localized marketing tools.
+              </p>
+              <Link to="/projects" className="text-primary dark:text-accent hover:underline">
+                Learn More →
+              </Link>
+            </div>
+            <div className="bg-white dark:bg-dark-card rounded-lg shadow-lg p-6">
+              <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-dark-text">
+                QuickSite - Website Builder
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400 mb-4">
+                An innovative SaaS solution for generating fully functional websites instantly, featuring advanced SEO tools and pre-built responsive templates.
+              </p>
+              <Link to="/projects" className="text-primary dark:text-accent hover:underline">
+                Learn More →
+              </Link>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </div>
   );
