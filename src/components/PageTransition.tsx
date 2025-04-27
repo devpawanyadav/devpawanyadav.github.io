@@ -1,36 +1,15 @@
-import { motion } from 'framer-motion';
-import { useEffect } from 'react';
-import { useLoading } from '../context/LoadingContext';
+import React from 'react';
 
 interface PageTransitionProps {
   children: React.ReactNode;
+  className?: string;
 }
 
-const PageTransition = ({ children }: PageTransitionProps) => {
-  const { setLoading } = useLoading();
-
-  useEffect(() => {
-    setLoading(true);
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 500);
-    return () => clearTimeout(timer);
-  }, [setLoading]);
-
+const PageTransition: React.FC<PageTransitionProps> = ({ children, className = '' }) => {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
-      transition={{
-        type: 'spring',
-        stiffness: 260,
-        damping: 20,
-        duration: 0.3
-      }}
-    >
+    <div className={`animate-fadeIn ${className}`}>
       {children}
-    </motion.div>
+    </div>
   );
 };
 

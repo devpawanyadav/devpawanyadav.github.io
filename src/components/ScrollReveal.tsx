@@ -1,71 +1,40 @@
-import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
-import { useInView } from 'react-intersection-observer';
+import React, { useEffect, useRef } from 'react';
 
 interface ScrollRevealProps {
   children: React.ReactNode;
-  animation?: 'fade' | 'slide-up' | 'slide-left' | 'slide-right';
   delay?: number;
-  duration?: number;
-  threshold?: number;
-  margin?: string;
 }
 
-const animations = {
-  'fade': {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1 }
-  },
-  'slide-up': {
-    hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0 }
-  },
-  'slide-left': {
-    hidden: { opacity: 0, x: -50 },
-    visible: { opacity: 1, x: 0 }
-  },
-  'slide-right': {
-    hidden: { opacity: 0, x: 50 },
-    visible: { opacity: 1, x: 0 }
-  }
-};
-
-const ScrollReveal = ({ 
-  children, 
-  animation = 'fade',
-  delay = 0,
-  duration = 0.5,
-  threshold = 0.1,
-  margin = '-100px'
-}: ScrollRevealProps) => {
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold,
-    rootMargin: margin
-  });
-
-  const [isVisible, setIsVisible] = useState(false);
+const ScrollReveal: React.FC<ScrollRevealProps> = ({ children, delay = 0 }) => {
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (inView) {
-      setIsVisible(true);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('opacity-100', 'translate-y-0');
+            observer.unobserve(entry.target);
+          }, delay);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
     }
-  }, [inView]);
+
+    return () => observer.disconnect();
+  }, [delay]);
 
   return (
-    <motion.div
+    <div
       ref={ref}
-      initial="hidden"
-      animate={isVisible ? "visible" : "hidden"}
-      variants={animations[animation]}
-      transition={{ 
-        duration,
-        delay,
-        ease: [0.25, 0.1, 0.25, 1]
-      }}
+      className="opacity-0 translate-y-4 transition-all duration-500 ease-out"
     >
       {children}
-    </motion.div>
+    </div>
   );
 };
 
