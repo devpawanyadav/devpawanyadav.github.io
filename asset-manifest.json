@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/static/css/main.9d688f0c.css",
-    "main.js": "/static/js/main.877eb095.js",
-    "static/js/453.c78e34a8.chunk.js": "/static/js/453.c78e34a8.chunk.js",
-    "index.html": "/index.html",
-    "main.9d688f0c.css.map": "/static/css/main.9d688f0c.css.map",
-    "main.877eb095.js.map": "/static/js/main.877eb095.js.map",
-    "453.c78e34a8.chunk.js.map": "/static/js/453.c78e34a8.chunk.js.map"
+    "main.css": "/devpawanyadav.github.io/static/css/main.9d688f0c.css",
+    "main.js": "/devpawanyadav.github.io/static/js/main.2ddaf566.js",
+    "static/js/453.c78e34a8.chunk.js": "/devpawanyadav.github.io/static/js/453.c78e34a8.chunk.js",
+    "index.html": "/devpawanyadav.github.io/index.html",
+    "main.9d688f0c.css.map": "/devpawanyadav.github.io/static/css/main.9d688f0c.css.map",
+    "main.2ddaf566.js.map": "/devpawanyadav.github.io/static/js/main.2ddaf566.js.map",
+    "453.c78e34a8.chunk.js.map": "/devpawanyadav.github.io/static/js/453.c78e34a8.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.9d688f0c.css",
-    "static/js/main.877eb095.js"
+    "static/js/main.2ddaf566.js"
   ]
 }
