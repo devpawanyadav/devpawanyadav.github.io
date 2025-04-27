@@ -1,5 +1,6 @@
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import React, { useState, useEffect } from 'react';
+import { useLoading } from '../context/LoadingContext';
 
 interface Project {
   title: string;
@@ -14,9 +15,11 @@ const Projects = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [projects, setProjects] = useState<Project[]>([]);
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const { setLoading } = useLoading();
 
   useEffect(() => {
     const loadProjects = async () => {
+      setLoading(true);
       await new Promise(resolve => setTimeout(resolve, 1000));
       setProjects([
         // Web Development Projects
@@ -149,20 +152,23 @@ const Projects = () => {
           image: 'https://placehold.co/600x400'
         }
       ]);
+      setLoading(false);
       setIsLoading(false);
     };
 
     loadProjects();
-  }, []);
+  }, [setLoading]);
 
   const handleCategoryClick = (categoryId: string) => {
-    // Force state update and prevent any race conditions
+    setLoading(true);
     setSelectedCategory(prevCategory => {
       if (prevCategory === categoryId) {
-        return categoryId; // Still update to trigger re-render
+        return categoryId;
       }
       return categoryId;
     });
+    // Simulate loading time for smooth transition
+    setTimeout(() => setLoading(false), 500);
   };
 
   // Memoize filtered projects to prevent unnecessary re-renders
@@ -182,11 +188,12 @@ const Projects = () => {
     { id: 'cloud', label: 'Cloud & DevOps' }
   ];
 
+  const loadingArray = Array(6).fill(null); // For loading skeletons
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50 dark:from-dark-bg dark:to-gray-900">
       {/* Hero Section with Animated Background */}
       <div className="relative overflow-hidden pb-32">
-        {/* Animated geometric shapes */}
         <div className="absolute inset-0 overflow-hidden" style={{ zIndex: 0 }}>
           <div className="absolute top-0 left-0 w-96 h-96 bg-primary/5 rounded-full mix-blend-multiply filter blur-xl animate-blob" />
           <div className="absolute top-0 right-0 w-96 h-96 bg-secondary/5 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000" />
@@ -233,23 +240,23 @@ const Projects = () => {
           transition={{ delay: 0.4 }}
           className="max-w-4xl mx-auto"
         >
-          <div className="bg-white dark:bg-dark-card rounded-2xl shadow-lg p-4 flex flex-wrap gap-4 justify-center relative">
-            {categories.map((category) => (
-              <button
+          <div className="bg-white dark:bg-dark-card rounded-2xl shadow-lg p-4 flex flex-wrap gap-4 justify-center relative overflow-hidden">
+            {categories.map((category, index) => (
+              <motion.button
                 key={category.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 + index * 0.1 }}
                 type="button"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleCategoryClick(category.id);
-                }}
+                onClick={() => handleCategoryClick(category.id)}
                 className={`px-6 py-2 rounded-xl text-sm font-medium transition-all duration-300 cursor-pointer relative
                   ${selectedCategory === category.id 
-                    ? 'bg-primary text-white shadow-lg scale-105' 
+                    ? 'bg-gradient-to-r from-primary to-secondary dark:from-accent dark:to-primary text-white shadow-lg scale-105' 
                     : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-primary/10 dark:hover:bg-accent/10'
                   }`}
               >
                 {category.label}
-              </button>
+              </motion.button>
             ))}
           </div>
         </motion.div>
@@ -263,16 +270,9 @@ const Projects = () => {
           transition={{ delay: 0.6 }}
           className="max-w-7xl mx-auto"
         >
-          {/* Debug info */}
-          <div className="text-center mb-4 text-gray-600 dark:text-gray-400">
-            <p>Current category: {selectedCategory}</p>
-            <p>Showing {filteredProjects.length} projects</p>
-          </div>
-
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {isLoading ? (
-              // Loading skeletons with subtle animation
-              [...Array(3)].map((_, index) => (
+              loadingArray.map((_, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0 }}
@@ -287,7 +287,7 @@ const Projects = () => {
                       <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded mb-4" />
                       <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-5/6 mb-6" />
                       <div className="flex flex-wrap gap-2">
-                        {[...Array(3)].map((_, i) => (
+                        {[1, 2, 3].map((i) => (
                           <div key={i} className="h-6 w-16 bg-gray-200 dark:bg-gray-700 rounded-full" />
                         ))}
                       </div>
@@ -296,17 +296,13 @@ const Projects = () => {
                 </motion.div>
               ))
             ) : (
-              // Actual project cards with hover effects and animations
               filteredProjects.map((project, index) => (
                 <motion.div
                   key={project.title}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  whileHover={{ 
-                    scale: 1.03,
-                    transition: { duration: 0.2 }
-                  }}
+                  whileHover={{ scale: 1.03 }}
                   className="group relative bg-white dark:bg-dark-card rounded-2xl shadow-lg overflow-hidden
                            transition-all duration-300 hover:shadow-2xl"
                 >
@@ -318,10 +314,8 @@ const Projects = () => {
                       src={project.image}
                       alt={project.title}
                       className="w-full h-full object-cover"
-                      whileHover={{ 
-                        scale: 1.1,
-                        transition: { duration: 0.3 }
-                      }}
+                      whileHover={{ scale: 1.1 }}
+                      transition={{ duration: 0.3 }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </div>

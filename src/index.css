@@ -2,20 +2,98 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  margin: 0;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+@layer base {
+  /* Focus styles */
+  :focus-visible {
+    @apply outline-none ring-2 ring-primary dark:ring-accent ring-offset-2 ring-offset-white 
+           dark:ring-offset-dark-bg rounded-lg transition-shadow duration-200;
+  }
 
-body {
-  @apply transition-colors duration-200;
-}
+  /* Screen reader only utilities */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  .sr-only.not-sr-only {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+  }
+
+  /* Animation utilities */
+  @keyframes blob {
+    0% {
+      transform: translate(0px, 0px) scale(1);
+    }
+    33% {
+      transform: translate(30px, -50px) scale(1.1);
+    }
+    66% {
+      transform: translate(-20px, 20px) scale(0.9);
+    }
+    100% {
+      transform: translate(0px, 0px) scale(1);
+    }
+  }
+
+  .animate-blob {
+    animation: blob 7s infinite;
+  }
+
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+
+  .animation-delay-4000 {
+    animation-delay: 4s;
+  }
+
+  /* Base styles for better readability */
+  body {
+    @apply antialiased text-base;
+  }
+
+  /* Improved focus outlines for form elements */
+  input:focus,
+  textarea:focus,
+  select:focus,
+  button:focus {
+    @apply outline-none ring-2 ring-primary dark:ring-accent ring-offset-2 
+           ring-offset-white dark:ring-offset-dark-bg transition-shadow duration-200;
+  }
+
+  /* Skip link styles */
+  .skip-link {
+    @apply sr-only focus:not-sr-only focus:fixed focus:top-0 focus:left-0 focus:z-50
+           focus:p-4 focus:bg-white focus:dark:bg-dark-card focus:text-primary 
+           focus:dark:text-accent focus:outline-none focus:ring-2 focus:ring-primary 
+           focus:dark:ring-accent;
+  }
+
+  /* Smooth scrolling for the whole page */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Better tap targets on mobile */
+  @media (max-width: 640px) {
+    button, 
+    [role="button"],
+    a {
+      @apply min-h-[44px] min-w-[44px] p-2;
+    }
+  }
 }
