@@ -10,5 +10,9 @@ module.exports = {
     alias: {
       '@': path.resolve(__dirname, 'src'),
     },
+    configure: (webpackConfig) => {
+      webpackConfig.output.publicPath = '/';
+      return webpackConfig;
+    },
   },
 };
