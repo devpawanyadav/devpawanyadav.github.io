@@ -97,16 +97,8 @@ export default function Contact() {
           >
             <form
               className="contact__form glass"
-              action="https://formspree.io/f/placeholder"
+              action="https://formspree.io/f/xyzebelp"
               method="POST"
-              onSubmit={(e) => {
-                e.preventDefault();
-                const email = 'pawanyd2012@gmail.com';
-                const name = e.target.elements.name.value;
-                const subject = e.target.elements.subject.value;
-                const message = e.target.elements.message.value;
-                window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject || 'Hello from Portfolio')}&body=${encodeURIComponent(`Hi Pawan,\n\nMy name is ${name}.\n\n${message}`)}`;
-              }}
             >
               <h3 className="contact__form-title">Send a Message</h3>
               <div className="contact__form-group">
