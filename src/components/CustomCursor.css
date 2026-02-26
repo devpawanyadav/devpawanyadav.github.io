@@ -1,0 +1,105 @@
+/* Hide default cursor on non-touch devices */
+@media (hover: hover) and (pointer: fine) {
+  html, body, * {
+    cursor: none !important;
+  }
+}
+
+/* Main cursor dot */
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99999;
+  pointer-events: none;
+  mix-blend-mode: difference;
+}
+
+.cursor--dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: white;
+}
+
+.cursor--active {
+  background: var(--accent-light);
+  mix-blend-mode: normal;
+}
+
+/* Shaking state - cursor glows pink */
+.cursor--shaking {
+  background: #f472b6;
+  mix-blend-mode: normal;
+  box-shadow: 0 0 20px rgba(244, 114, 182, 0.6), 0 0 40px rgba(244, 114, 182, 0.3);
+}
+
+/* Trailing ring */
+.cursor--ring {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  background: transparent;
+  mix-blend-mode: normal;
+}
+
+.cursor--ring-active {
+  border-width: 2px;
+}
+
+.cursor--ring-shaking {
+  border-width: 2px;
+  box-shadow: 0 0 15px rgba(244, 114, 182, 0.3);
+}
+
+/* Click ripple */
+.cursor-ripple {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  margin-left: -10px;
+  margin-top: -10px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(99, 102, 241, 0.5);
+  pointer-events: none;
+  z-index: 99998;
+}
+
+/* ===== Shake Hearts - Coding Love Particles ===== */
+.cursor-heart {
+  position: fixed;
+  pointer-events: none;
+  z-index: 99997;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-origin: center center;
+}
+
+.cursor-heart__svg {
+  filter: drop-shadow(0 0 6px currentColor);
+}
+
+.cursor-heart__code {
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+  text-shadow:
+    0 0 8px currentColor,
+    0 0 16px currentColor;
+  letter-spacing: 1px;
+  user-select: none;
+}
+
+/* Hide custom cursor on touch / small screens */
+@media (hover: none), (max-width: 768px) {
+  .cursor,
+  .cursor-ripple,
+  .cursor-heart {
+    display: none !important;
+  }
+  html, body, * {
+    cursor: auto !important;
+  }
+}

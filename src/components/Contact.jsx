@@ -65,6 +65,7 @@ export default function Contact() {
             <motion.a
               href="mailto:iampawanyd@gmail.com"
               className="contact__card glass"
+              data-magnetic
               whileHover={{ y: -4, transition: { duration: 0.2 } }}
             >
               <div className="contact__card-icon contact__card-icon--accent">
@@ -79,6 +80,7 @@ export default function Contact() {
             <motion.a
               href="tel:+917737507050"
               className="contact__card glass"
+              data-magnetic
               whileHover={{ y: -4, transition: { duration: 0.2 } }}
             >
               <div className="contact__card-icon contact__card-icon--cyan">
@@ -95,6 +97,7 @@ export default function Contact() {
               target="_blank"
               rel="noopener noreferrer"
               className="contact__card glass"
+              data-magnetic
               whileHover={{ y: -4, transition: { duration: 0.2 } }}
             >
               <div className="contact__card-icon contact__card-icon--green">
@@ -190,6 +193,7 @@ export default function Contact() {
               <motion.button
                 type="submit"
                 className="contact__form-submit"
+                data-magnetic
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 disabled={isSubmitting}

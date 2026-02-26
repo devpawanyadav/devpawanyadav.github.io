@@ -104,11 +104,11 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.2, duration: 0.6 }}
           >
-            <a href="#contact" className="hero__btn hero__btn--primary">
+            <a href="#contact" className="hero__btn hero__btn--primary" data-magnetic>
               <FiMail />
               Get In Touch
             </a>
-            <a href="#experience" className="hero__btn hero__btn--secondary">
+            <a href="#experience" className="hero__btn hero__btn--secondary" data-magnetic>
               <FiDownload />
               View My Work
             </a>
@@ -120,10 +120,10 @@ export default function Hero() {
             animate={{ opacity: 1 }}
             transition={{ delay: 1.4, duration: 0.6 }}
           >
-            <a href="https://www.linkedin.com/in/pawanyd" target="_blank" rel="noopener noreferrer" className="hero__social-link" aria-label="LinkedIn">
+            <a href="https://www.linkedin.com/in/pawanyd" target="_blank" rel="noopener noreferrer" className="hero__social-link" data-magnetic aria-label="LinkedIn">
               <FiLinkedin />
             </a>
-            <a href="mailto:iampawanyd@gmail.com" className="hero__social-link" aria-label="Email">
+            <a href="mailto:pawanyd2012@gmail.com" className="hero__social-link" data-magnetic aria-label="Email">
               <FiMail />
             </a>
           </motion.div>

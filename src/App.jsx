@@ -1,4 +1,5 @@
 import './styles/global.css';
+import CustomCursor from './components/CustomCursor';
 import ParticleCanvas from './components/ParticleCanvas';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -12,6 +13,7 @@ import Contact from './components/Contact';
 export default function App() {
   return (
     <>
+      <CustomCursor />
       <ParticleCanvas />
       <Navbar />
       <main style={{ position: 'relative', zIndex: 1 }}>

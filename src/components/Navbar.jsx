@@ -45,6 +45,7 @@ export default function Navbar() {
         <motion.a
           href="#home"
           className="navbar__logo"
+          data-magnetic
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
@@ -71,6 +72,7 @@ export default function Navbar() {
         <motion.a
           href="#contact"
           className="navbar__cta"
+          data-magnetic
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
