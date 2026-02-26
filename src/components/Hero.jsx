@@ -123,7 +123,7 @@ export default function Hero() {
             <a href="https://www.linkedin.com/in/pawanyd" target="_blank" rel="noopener noreferrer" className="hero__social-link" aria-label="LinkedIn">
               <FiLinkedin />
             </a>
-            <a href="mailto:pawanyd2012@gmail.com" className="hero__social-link" aria-label="Email">
+            <a href="mailto:iampawanyd@gmail.com" className="hero__social-link" aria-label="Email">
               <FiMail />
             </a>
           </motion.div>

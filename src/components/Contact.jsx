@@ -63,7 +63,7 @@ export default function Contact() {
             transition={{ duration: 0.6 }}
           >
             <motion.a
-              href="mailto:pawanyd2012@gmail.com"
+              href="mailto:iampawanyd@gmail.com"
               className="contact__card glass"
               whileHover={{ y: -4, transition: { duration: 0.2 } }}
             >
@@ -72,7 +72,7 @@ export default function Contact() {
               </div>
               <div>
                 <h4 className="contact__card-label">Email</h4>
-                <p className="contact__card-value">pawanyd2012@gmail.com</p>
+                <p className="contact__card-value">iampawanyd@gmail.com</p>
               </div>
             </motion.a>
 

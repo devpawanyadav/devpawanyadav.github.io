@@ -164,7 +164,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📞 Contact
 
 **Pawan Kumar**  
-📧 Email: [pawanyd2012@gmail.com](mailto:pawanyd2012@gmail.com)  
+📧 Email: [iampawanyd@gmail.com](mailto:iampawanyd@gmail.com)  
 💼 LinkedIn: [linkedin.com/in/pawanyd](https://www.linkedin.com/in/pawanyd)  
 🌐 Portfolio: [devpawanyadav.github.io](https://devpawanyadav.github.io)
 
