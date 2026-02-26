@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { FiBriefcase, FiCalendar, FiMapPin, FiChevronRight } from 'react-icons/fi';
+import TiltCard from './TiltCard';
 import './Experience.css';
 
 const experiences = [
@@ -81,6 +82,14 @@ const experiences = [
   },
 ];
 
+const glareColors = {
+  accent: 'rgba(99, 102, 241, 0.12)',
+  cyan: 'rgba(34, 211, 238, 0.12)',
+  green: 'rgba(52, 211, 153, 0.12)',
+  orange: 'rgba(251, 146, 60, 0.12)',
+  pink: 'rgba(244, 114, 182, 0.12)',
+};
+
 const container = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.15 } },
@@ -132,9 +141,11 @@ export default function Experience() {
                 <FiBriefcase />
               </div>
 
-              <motion.div
+              <TiltCard
                 className="experience__card glass"
-                whileHover={{ y: -4, transition: { duration: 0.2 } }}
+                glareColor={glareColors[exp.color] || glareColors.accent}
+                tiltAmount={8}
+                scale={1.02}
               >
                 <div className="experience__card-header">
                   <div>
@@ -167,7 +178,7 @@ export default function Experience() {
                     <span key={ti} className="experience__tech-tag mono">{t}</span>
                   ))}
                 </div>
-              </motion.div>
+              </TiltCard>
             </motion.div>
           ))}
         </motion.div>

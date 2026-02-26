@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { FiBookOpen, FiAward } from 'react-icons/fi';
+import TiltCard from './TiltCard';
 import './Education.css';
 
 const education = [
@@ -42,23 +43,28 @@ export default function Education() {
           {education.map((edu, i) => (
             <motion.div
               key={i}
-              className="education__card glass"
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: i * 0.2 }}
-              whileHover={{ y: -6, transition: { duration: 0.2 } }}
             >
-              <div className="education__card-icon">
-                {edu.icon}
-              </div>
-              <div className="education__card-content">
-                <h3 className="education__degree">{edu.degree}</h3>
-                <p className="education__field">{edu.field}</p>
-                <p className="education__institution">{edu.institution}</p>
-                <span className="education__period mono">{edu.period}</span>
-              </div>
-              <div className="education__card-glow" />
+              <TiltCard
+                className="education__card glass"
+                tiltAmount={12}
+                scale={1.04}
+                glareColor={i === 0 ? 'rgba(99, 102, 241, 0.12)' : 'rgba(34, 211, 238, 0.12)'}
+              >
+                <div className="education__card-icon">
+                  {edu.icon}
+                </div>
+                <div className="education__card-content">
+                  <h3 className="education__degree">{edu.degree}</h3>
+                  <p className="education__field">{edu.field}</p>
+                  <p className="education__institution">{edu.institution}</p>
+                  <span className="education__period mono">{edu.period}</span>
+                </div>
+                <div className="education__card-glow" />
+              </TiltCard>
             </motion.div>
           ))}
         </div>

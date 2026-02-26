@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import TiltCard from './TiltCard';
 import './Skills.css';
 
 const skillCategories = [
@@ -81,6 +82,14 @@ const cardVariant = {
   visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.5 } },
 };
 
+const glareColors = {
+  accent: 'rgba(99, 102, 241, 0.12)',
+  cyan: 'rgba(34, 211, 238, 0.12)',
+  green: 'rgba(52, 211, 153, 0.12)',
+  orange: 'rgba(251, 146, 60, 0.12)',
+  pink: 'rgba(244, 114, 182, 0.12)',
+};
+
 export default function Skills() {
   const [ref, inView] = useInView({ threshold: 0.05, triggerOnce: true });
 
@@ -131,31 +140,32 @@ export default function Skills() {
           animate={inView ? 'visible' : 'hidden'}
         >
           {skillCategories.map((cat, ci) => (
-            <motion.div
-              key={ci}
-              className={`skills__card glass skills__card--${cat.color}`}
-              variants={cardVariant}
-              whileHover={{ y: -5, transition: { duration: 0.2 } }}
-            >
-              <h3 className="skills__card-title">{cat.title}</h3>
-              <div className="skills__bars">
-                {cat.skills.map((skill, si) => (
-                  <div key={si} className="skills__bar-group">
-                    <div className="skills__bar-header">
-                      <span className="skills__bar-name">{skill.name}</span>
-                      <span className="skills__bar-pct mono">{skill.level}%</span>
+            <motion.div key={ci} variants={cardVariant}>
+              <TiltCard
+                className={`skills__card glass skills__card--${cat.color}`}
+                glareColor={glareColors[cat.color] || glareColors.accent}
+                tiltAmount={12}
+              >
+                <h3 className="skills__card-title">{cat.title}</h3>
+                <div className="skills__bars">
+                  {cat.skills.map((skill, si) => (
+                    <div key={si} className="skills__bar-group">
+                      <div className="skills__bar-header">
+                        <span className="skills__bar-name">{skill.name}</span>
+                        <span className="skills__bar-pct mono">{skill.level}%</span>
+                      </div>
+                      <div className="skills__bar-track">
+                        <motion.div
+                          className={`skills__bar-fill skills__bar-fill--${cat.color}`}
+                          initial={{ width: 0 }}
+                          animate={inView ? { width: `${skill.level}%` } : { width: 0 }}
+                          transition={{ duration: 1, delay: ci * 0.1 + si * 0.1, ease: [0.4, 0, 0.2, 1] }}
+                        />
+                      </div>
                     </div>
-                    <div className="skills__bar-track">
-                      <motion.div
-                        className={`skills__bar-fill skills__bar-fill--${cat.color}`}
-                        initial={{ width: 0 }}
-                        animate={inView ? { width: `${skill.level}%` } : { width: 0 }}
-                        transition={{ duration: 1, delay: ci * 0.1 + si * 0.1, ease: [0.4, 0, 0.2, 1] }}
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
+              </TiltCard>
             </motion.div>
           ))}
         </motion.div>

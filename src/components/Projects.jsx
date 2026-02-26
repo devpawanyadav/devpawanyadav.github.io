@@ -6,6 +6,7 @@ import {
   FiGlobe, FiServer, FiSmile, FiBarChart2,
   FiExternalLink, FiChevronRight
 } from 'react-icons/fi';
+import TiltCard from './TiltCard';
 import './Projects.css';
 
 const projects = [
@@ -129,6 +130,14 @@ const cardVariant = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.4, 0, 0.2, 1] } },
 };
 
+const glareColors = {
+  accent: 'rgba(99, 102, 241, 0.15)',
+  cyan: 'rgba(34, 211, 238, 0.15)',
+  green: 'rgba(52, 211, 153, 0.15)',
+  orange: 'rgba(251, 146, 60, 0.15)',
+  pink: 'rgba(244, 114, 182, 0.15)',
+};
+
 export default function Projects() {
   const [ref, inView] = useInView({ threshold: 0.05, triggerOnce: true });
   const [expandedIdx, setExpandedIdx] = useState(null);
@@ -164,42 +173,44 @@ export default function Projects() {
           animate={inView ? 'visible' : 'hidden'}
         >
           {featured.map((project, i) => (
-            <motion.div
-              key={i}
-              className={`projects__featured-card glass projects__featured-card--${project.color}`}
-              variants={cardVariant}
-              whileHover={{ y: -6, transition: { duration: 0.2 } }}
-            >
-              <div className="projects__featured-header">
-                <div className={`projects__featured-icon projects__featured-icon--${project.color}`}>
-                  {project.icon}
+            <motion.div key={i} variants={cardVariant}>
+              <TiltCard
+                className={`projects__featured-card glass projects__featured-card--${project.color}`}
+                glareColor={glareColors[project.color] || glareColors.accent}
+                tiltAmount={10}
+                scale={1.03}
+              >
+                <div className="projects__featured-header">
+                  <div className={`projects__featured-icon projects__featured-icon--${project.color}`}>
+                    {project.icon}
+                  </div>
+                  <div>
+                    <h3 className="projects__featured-title">{project.title}</h3>
+                    <span className="projects__featured-company mono">{project.company}</span>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="projects__featured-title">{project.title}</h3>
-                  <span className="projects__featured-company mono">{project.company}</span>
+
+                <p className="projects__featured-tagline">{project.tagline}</p>
+                <p className="projects__featured-desc">{project.description}</p>
+
+                <div className="projects__featured-impact">
+                  <h4 className="projects__featured-impact-title">Key Impact</h4>
+                  <ul className="projects__featured-impact-list">
+                    {project.impact.map((item, ii) => (
+                      <li key={ii}>
+                        <FiChevronRight className={`projects__impact-icon projects__impact-icon--${project.color}`} />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-              </div>
 
-              <p className="projects__featured-tagline">{project.tagline}</p>
-              <p className="projects__featured-desc">{project.description}</p>
-
-              <div className="projects__featured-impact">
-                <h4 className="projects__featured-impact-title">Key Impact</h4>
-                <ul className="projects__featured-impact-list">
-                  {project.impact.map((item, ii) => (
-                    <li key={ii}>
-                      <FiChevronRight className={`projects__impact-icon projects__impact-icon--${project.color}`} />
-                      <span>{item}</span>
-                    </li>
+                <div className="projects__featured-tech">
+                  {project.tech.map((t, ti) => (
+                    <span key={ti} className="projects__tech-tag mono">{t}</span>
                   ))}
-                </ul>
-              </div>
-
-              <div className="projects__featured-tech">
-                {project.tech.map((t, ti) => (
-                  <span key={ti} className="projects__tech-tag mono">{t}</span>
-                ))}
-              </div>
+                </div>
+              </TiltCard>
             </motion.div>
           ))}
         </motion.div>
@@ -213,59 +224,62 @@ export default function Projects() {
           viewport={{ once: true, amount: 0.05 }}
         >
           {others.map((project, i) => (
-            <motion.div
-              key={i}
-              className={`projects__card glass projects__card--${project.color}`}
-              variants={cardVariant}
-              whileHover={{ y: -4, transition: { duration: 0.2 } }}
-              onClick={() => setExpandedIdx(expandedIdx === i ? null : i)}
-            >
-              <div className="projects__card-header">
-                <div className={`projects__card-icon projects__card-icon--${project.color}`}>
-                  {project.icon}
+            <motion.div key={i} variants={cardVariant}>
+              <TiltCard
+                className={`projects__card glass projects__card--${project.color}`}
+                glareColor={glareColors[project.color] || glareColors.accent}
+                tiltAmount={14}
+                scale={1.04}
+              >
+                <div className="projects__card-inner" onClick={() => setExpandedIdx(expandedIdx === i ? null : i)}>
+                  <div className="projects__card-header">
+                    <div className={`projects__card-icon projects__card-icon--${project.color}`}>
+                      {project.icon}
+                    </div>
+                    <div>
+                      <h3 className="projects__card-title">{project.title}</h3>
+                      <span className="projects__card-company mono">{project.company}</span>
+                    </div>
+                  </div>
+
+                  <p className="projects__card-tagline">{project.tagline}</p>
+
+                  <AnimatePresence>
+                    {expandedIdx === i && (
+                      <motion.div
+                        className="projects__card-expanded"
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <p className="projects__card-desc">{project.description}</p>
+                        <ul className="projects__card-impact">
+                          {project.impact.map((item, ii) => (
+                            <li key={ii}>
+                              <FiChevronRight className={`projects__impact-icon projects__impact-icon--${project.color}`} />
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+
+                  <div className="projects__card-tech">
+                    {project.tech.slice(0, 4).map((t, ti) => (
+                      <span key={ti} className="projects__tech-tag mono">{t}</span>
+                    ))}
+                    {project.tech.length > 4 && (
+                      <span className="projects__tech-tag projects__tech-tag--more mono">+{project.tech.length - 4}</span>
+                    )}
+                  </div>
+
+                  <span className="projects__card-expand mono">
+                    {expandedIdx === i ? '- collapse' : '+ details'}
+                  </span>
                 </div>
-                <div>
-                  <h3 className="projects__card-title">{project.title}</h3>
-                  <span className="projects__card-company mono">{project.company}</span>
-                </div>
-              </div>
-
-              <p className="projects__card-tagline">{project.tagline}</p>
-
-              <AnimatePresence>
-                {expandedIdx === i && (
-                  <motion.div
-                    className="projects__card-expanded"
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <p className="projects__card-desc">{project.description}</p>
-                    <ul className="projects__card-impact">
-                      {project.impact.map((item, ii) => (
-                        <li key={ii}>
-                          <FiChevronRight className={`projects__impact-icon projects__impact-icon--${project.color}`} />
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-
-              <div className="projects__card-tech">
-                {project.tech.slice(0, 4).map((t, ti) => (
-                  <span key={ti} className="projects__tech-tag mono">{t}</span>
-                ))}
-                {project.tech.length > 4 && (
-                  <span className="projects__tech-tag projects__tech-tag--more mono">+{project.tech.length - 4}</span>
-                )}
-              </div>
-
-              <span className="projects__card-expand mono">
-                {expandedIdx === i ? '- collapse' : '+ details'}
-              </span>
+              </TiltCard>
             </motion.div>
           ))}
         </motion.div>

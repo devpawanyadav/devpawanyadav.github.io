@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { FiCode, FiServer, FiCloud, FiCpu, FiUsers, FiTrendingUp } from 'react-icons/fi';
+import TiltCard from './TiltCard';
 import './About.css';
 
 const highlights = [
@@ -52,7 +53,7 @@ export default function About() {
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
           >
-            <div className="about__story-card glass">
+            <TiltCard className="about__story-card glass" tiltAmount={6} scale={1.01}>
               <h3 className="about__story-title">My Journey</h3>
               <p>
                 I began my career in <span className="highlight">2016</span> as an Associate Developer at Grepix Infotech,
@@ -87,7 +88,7 @@ export default function About() {
                   </div>
                 </div>
               </div>
-            </div>
+            </TiltCard>
           </motion.div>
 
           <motion.div
@@ -97,12 +98,14 @@ export default function About() {
             animate={inView ? 'visible' : 'hidden'}
           >
             {highlights.map((h, i) => (
-              <motion.div key={i} className="about__highlight-card glass" variants={item}>
-                <div className="about__highlight-icon">{h.icon}</div>
-                <div>
-                  <h4 className="about__highlight-label">{h.label}</h4>
-                  <p className="about__highlight-desc">{h.desc}</p>
-                </div>
+              <motion.div key={i} variants={item}>
+                <TiltCard className="about__highlight-card glass" tiltAmount={16} scale={1.05} perspective={600}>
+                  <div className="about__highlight-icon">{h.icon}</div>
+                  <div>
+                    <h4 className="about__highlight-label">{h.label}</h4>
+                    <p className="about__highlight-desc">{h.desc}</p>
+                  </div>
+                </TiltCard>
               </motion.div>
             ))}
           </motion.div>
